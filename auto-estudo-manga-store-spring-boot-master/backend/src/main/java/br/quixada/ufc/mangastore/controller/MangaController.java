@@ -47,7 +47,6 @@ public class MangaController {
             @RequestParam("title") String title,
             @RequestParam("number") Integer number,
             @RequestParam("price") float price,
-            // 
             @RequestParam("summary") String summary) throws IOException{
         Manga manga = new Manga();
         manga.setId(id);

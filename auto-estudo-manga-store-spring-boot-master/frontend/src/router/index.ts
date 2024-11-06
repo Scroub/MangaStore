@@ -5,6 +5,7 @@ import MangaForm from '../views/admin/MangaForm.vue'
 import Home from '../views/Home.vue'
 import MangaExpandedCard from '../views/MangaInDetails.vue'
 import Error from '../views/error/Error.vue'
+import Categoria from '../views/Categoria.vue'
 
 const routes = [
     {
@@ -37,6 +38,13 @@ const routes = [
         name: "home",
         alias: '/mangas'
     }, 
+
+    {
+        path: "/categoria",
+        component: Categoria,
+        name: "categoria"
+    }, 
+
     {
         path: '/mangas/:id',
         component: MangaExpandedCard,

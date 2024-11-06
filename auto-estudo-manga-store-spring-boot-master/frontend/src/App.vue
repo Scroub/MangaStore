@@ -40,6 +40,11 @@ function logout() {
               <strong>Mangá Store</strong>
             </router-link>
           </a>
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <router-link to="/categoria" class="text-decoration-none text-reset">
+              <strong>Categorias</strong>
+            </router-link>
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
