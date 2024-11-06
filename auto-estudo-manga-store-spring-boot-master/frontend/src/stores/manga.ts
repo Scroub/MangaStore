@@ -18,7 +18,6 @@ export interface Manga {
     price: number,
     cover: string,
     summary:string,
-    gender:string,
     comments: Comments[]
     
 }

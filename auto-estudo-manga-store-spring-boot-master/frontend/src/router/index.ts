@@ -38,13 +38,6 @@ const routes = [
         name: "home",
         alias: '/mangas'
     }, 
-
-    {
-        path: "/categoria",
-        component: Categoria,
-        name: "categoria"
-    }, 
-
     {
         path: '/mangas/:id',
         component: MangaExpandedCard,

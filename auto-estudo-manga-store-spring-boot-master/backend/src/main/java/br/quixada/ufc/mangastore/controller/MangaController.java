@@ -26,13 +26,15 @@ public class MangaController {
             @RequestParam("files") MultipartFile multipartFile,
             @RequestParam("title") String title,
             @RequestParam("number") Integer number,
-            @RequestParam("price") float price) throws IOException {
+            @RequestParam("price") float price,
+            @RequestParam("summary") String summary) throws IOException {
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 
         Manga manga = new Manga();
         manga.setTitle(title);
         manga.setPrice(price);
         manga.setNumber(number);
+        manga.setSummary(summary);
         manga.setCover("/img/one_piece/" +fileName);
         Manga savedManga = repository.save(manga);
         String uploadDir = "src/main/resources/static/img/one_piece/";
