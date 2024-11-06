@@ -17,7 +17,7 @@ function logout() {
           <div class="row">
             <div class="col-sm-8 col-md-7 py-4">
               <h4 class="text-white">About</h4>
-              <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+              <p class="text-white">Somos uma loja virtual de Manga, dedicada a trazer o melhor do universo das histórias em quadrinhos japonesas para os leitores de todo o mundo. Nossa missão é oferecer uma ampla variedade de mangas, desde os clássicos até as últimas novidades, garantindo que você tenha acesso a títulos incríveis e exclusivos, tudo em um só lugar. </p>
             </div>
             <div class="col-sm-4 offset-md-1 py-4">
               <h4 class="text-white">{{ username }}</h4>
