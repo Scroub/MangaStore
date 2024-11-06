@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount, ref, resolveDirective } from 'vue';
 import { useMangaStore, Manga } from '../../stores/manga'
 import { imgURL } from '../../mixin/mangaMixing'
 import { isApplicationError } from '../../mixin/errorMessageMixing';
@@ -39,6 +39,7 @@ async function update() {
     formData.append('title', manga.value.title);
     formData.append('number', '' + manga.value.number);
     formData.append('price', '' + manga.value.price);
+    formData.append('summary', '' +  manga.value.summary);
     
     const result = await mangaStore.update(manga.value, formData) 
     
@@ -47,6 +48,8 @@ async function update() {
     } else {
         manga.value = result
         showPositiveAlert("Manga atualizado com sucesso.")
+        // Aqui só coloquei para realizar um redirecionamento para o manga selecionado assim que der um UPDATE //
+        router.push(`/mangas/${result.id}`);
     }
     
 }
@@ -67,6 +70,7 @@ async function create() {
     formData.append('title', manga.value.title);
     formData.append('number', '' + manga.value.number);
     formData.append('price', '' + manga.value.price);
+    formData.append('summary', '' + manga.value.summary);
 
     const result = await mangaStore.create(formData)
 
@@ -123,6 +127,10 @@ function showAlert(positive: boolean, message: string) {
             <div class="col-2 mb-3">
                 <label for="priceInput" class="form-label">Manga price</label>
                 <input type="text" id="priceInput" class="form-control" v-model="manga.price" placeholder="00.00">
+            </div>
+            <div class="col-12 mb-3">
+                <label for="summaryInput" class="form-label">Manga Summary</label>
+                <input type="text" id="summaryInput" class="form-control" v-model="manga.summary" placeholder="Give me a excelent Summary">
             </div>
         </div>
         <router-link to="/admin" class="btn btn-danger">Cancel</router-link> 

@@ -46,12 +46,15 @@ public class MangaController {
             @RequestParam(name = "files",required = false) MultipartFile multipartFile,
             @RequestParam("title") String title,
             @RequestParam("number") Integer number,
-            @RequestParam("price") float price) throws IOException{
+            @RequestParam("price") float price,
+            // 
+            @RequestParam("summary") String summary) throws IOException{
         Manga manga = new Manga();
         manga.setId(id);
         manga.setTitle(title);
         manga.setPrice(price);
         manga.setNumber(number);
+        manga.setSummary(summary);
         if(multipartFile==null){
             Manga mangaTemp = repository.findById(id).get();
             manga.setCover(mangaTemp.getCover());
