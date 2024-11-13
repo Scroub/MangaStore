@@ -1,5 +1,7 @@
 package br.quixada.ufc.mangastore.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,5 +15,6 @@ public class Comentario {
     private String description;
     private int rating;
     @ManyToOne
+    @JsonBackReference
     private Manga manga;
 }

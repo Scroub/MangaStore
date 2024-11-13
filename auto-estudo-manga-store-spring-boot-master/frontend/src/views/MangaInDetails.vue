@@ -58,6 +58,7 @@ onBeforeRouteUpdate( async (to, from) => {
                                 <p class="card-text">Volume: {{manga.number}}</p>
                                 <p class="card-text"><strong>Preço: <small class="text-danger">{{manga.price}}</small></strong></p>
                                 <p class="card-text"><strong>Sumário:</strong> <br>{{manga.summary}}</p>
+                                <p class="card-text"><strong>Genero:</strong> {{ manga.gender }}</p>
                             </div>
                         </div>
                     </div>

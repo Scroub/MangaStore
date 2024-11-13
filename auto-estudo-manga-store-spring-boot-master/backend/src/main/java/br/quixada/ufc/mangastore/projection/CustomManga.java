@@ -15,5 +15,6 @@ public interface CustomManga {
     float getPrice();
     String getCover();
     String getSummary();
+    String getGender();
     List<Comentario> getComments();
 }

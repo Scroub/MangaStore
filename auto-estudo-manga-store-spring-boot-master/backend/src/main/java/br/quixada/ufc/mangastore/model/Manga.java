@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Data
 @Entity
 public class Manga {
@@ -16,9 +18,12 @@ public class Manga {
     private long number;
     private float price;
     private String cover;
+    @Column(name = "gender")
+    private String gender;
     @Column(columnDefinition = "TEXT")
     private String summary;
-    @OneToMany(mappedBy = "manga")
+    @OneToMany(mappedBy = "manga", fetch = FetchType.LAZY)
+    @JsonManagedReference
     public List<Comentario> comments;
 
 }

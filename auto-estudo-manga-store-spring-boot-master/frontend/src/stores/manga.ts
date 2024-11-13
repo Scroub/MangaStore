@@ -18,6 +18,7 @@ export interface Manga {
     price: number,
     cover: string,
     summary:string,
+    gender:string,
     comments: Comments[]
     
 }
@@ -81,7 +82,6 @@ export const useMangaStore = defineStore('manga', () => {
             return data
         } catch(error) {
             return getAppError(error)
-            
         }
     }
         

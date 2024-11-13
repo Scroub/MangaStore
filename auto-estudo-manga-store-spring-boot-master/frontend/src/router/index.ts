@@ -5,7 +5,7 @@ import MangaForm from '../views/admin/MangaForm.vue'
 import Home from '../views/Home.vue'
 import MangaExpandedCard from '../views/MangaInDetails.vue'
 import Error from '../views/error/Error.vue'
-import Categoria from '../views/Categoria.vue'
+import MangaList from '../components/MangaList.vue'
 
 const routes = [
     {
@@ -47,6 +47,11 @@ const routes = [
         path: '/error',
         component: Error,
         name: 'error',
+        props: true
+    },
+    {
+        path: '/mangas/filterByCategory/:category',
+        component: MangaList,
         props: true
     }
 ]

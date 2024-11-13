@@ -19,37 +19,36 @@ const alertVisible = ref(false)
 const alertMessage = ref('')
 const alertFeedback = ref(false)
 
-onBeforeMount( async () => {
-    if(props.id) {
-       const result = await mangaStore.get(Number(props.id))
-       if(isApplicationError(result)) {
+onBeforeMount(async () => {
+    if (props.id) {
+        const result = await mangaStore.get(Number(props.id))
+        if (isApplicationError(result)) {
             alertMessage.value = result.message
-       } else {
+        } else {
             manga.value = result
-       }
+        }
     }
 })
 
 async function update() {
     let formData = new FormData()
-    if(cover.value.name) {
+    if (cover.value.name) {
         formData.append('files', cover.value)
     }
-    
+
     formData.append('title', manga.value.title);
     formData.append('number', '' + manga.value.number);
     formData.append('price', '' + manga.value.price);
-    formData.append('summary', '' +  manga.value.summary);
-    const result = await mangaStore.update(manga.value, formData) 
-    
-    if(isApplicationError(result)) {
+    formData.append('summary', '' + manga.value.summary);
+    formData.append('gender', '' + manga.value.gender)
+    const result = await mangaStore.update(manga.value, formData)
+
+    if (isApplicationError(result)) {
         showNegativeAlert(result.message)
     } else {
         manga.value = result
-        showPositiveAlert("Manga atualizado com sucesso.")
         router.push(`/mangas/${result.id}`);
     }
-    
 }
 
 function handleFileUpload(event: Event) {
@@ -59,9 +58,9 @@ function handleFileUpload(event: Event) {
 }
 
 async function create() {
-   
+
     const formData = new FormData()
-    if(cover.value.name) {
+    if (cover.value.name) {
         formData.append('files', cover.value, cover.value.name)
     }
 
@@ -69,10 +68,11 @@ async function create() {
     formData.append('number', '' + manga.value.number);
     formData.append('price', '' + manga.value.price);
     formData.append('summary', '' + manga.value.summary);
+    formData.append('gender', '' + manga.value.gender)
 
     const result = await mangaStore.create(formData)
 
-    if(isApplicationError(result)){
+    if (isApplicationError(result)) {
         showNegativeAlert("O manga não foi criado.")
     } else {
         showPositiveAlert("Manga criado com sucesso.")
@@ -82,7 +82,7 @@ async function create() {
 }
 
 function showPositiveAlert(message: string) {
-   showAlert(true, message)
+    showAlert(true, message)
 }
 
 function showNegativeAlert(message: string) {
@@ -104,11 +104,13 @@ function showAlert(positive: boolean, message: string) {
         </div>
     </div>
     <template v-else>
-        <div class="col-12 alert alert-dismissible fade show" :class="{ 'd-none': !alertVisible, 'alert-success': alertFeedback, 'alert-danger': !alertFeedback }" role="alert">
+        <div class="col-12 alert alert-dismissible fade show"
+            :class="{ 'd-none': !alertVisible, 'alert-success': alertFeedback, 'alert-danger': !alertFeedback }"
+            role="alert">
             {{ alertMessage }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <img class="col-auto" v-if="manga.cover" :src="imgURL(manga.cover)"/>
+        <img class="col-auto" v-if="manga.cover" :src="imgURL(manga.cover)" />
         <div class="row text-start">
             <div class="col-12 mb-3">
                 <label for="coverInput" class="form-label">Manga cover</label>
@@ -116,11 +118,13 @@ function showAlert(positive: boolean, message: string) {
             </div>
             <div class="col-12 mb-3">
                 <label for="titleInput" class="form-label">Manga title</label>
-                <input type="text" id="titleInput" class="form-control" v-model="manga.title" placeholder="an awesome title">
+                <input type="text" id="titleInput" class="form-control" v-model="manga.title"
+                    placeholder="an awesome title">
             </div>
-             <div class="col-3 mb-3 ">
+            <div class="col-3 mb-3 ">
                 <label for="numberInput" class="form-label">Manga number</label>
-                <input type="number" id="numberInput" class="form-control" v-model="manga.number" placeholder="volume number">
+                <input type="number" id="numberInput" class="form-control" v-model="manga.number"
+                    placeholder="volume number">
             </div>
             <div class="col-2 mb-3">
                 <label for="priceInput" class="form-label">Manga price</label>
@@ -128,10 +132,22 @@ function showAlert(positive: boolean, message: string) {
             </div>
             <div class="col-12 mb-3">
                 <label for="summaryInput" class="form-label">Manga summary</label>
-                <input type="text" id="summaryInput" class="form-control" v-model="manga.summary" placeholder="Give me a excelent Summary">
+                <input type="text" id="summaryInput" class="form-control" v-model="manga.summary"
+                    placeholder="Give me a excelent Summary">
+            </div>
+            <div class="col-3 mb-3">
+                <label for="genderInput" class="form-label">Manga Gender</label>
+                <select name="gender" id="genderInput" class="form-control" v-model="manga.gender">
+                    <option value="Aventura" selected>Aventura</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Comedia">Comedia</option>
+                    <option value="Slice of Life">Slice of Life</option>
+                    <option value="Ação">Ação</option>
+                    <option value="Terror">Terror</option>
+                </select>
             </div>
         </div>
-        <router-link to="/admin" class="btn btn-danger">Cancel</router-link> 
+        <router-link to="/admin" class="btn btn-danger">Cancel</router-link>
         <a class="btn btn-primary" v-if="manga.id" @click="update">Update</a>
         <a class="btn btn-success" v-else @click="create">Create</a>
     </template>
